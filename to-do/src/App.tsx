@@ -8,6 +8,7 @@ import SpinnerIcon from "./assets/icons/spinner.svg?react"
 import XIcon from "./assets/icons/x.svg?react"
 import Badge from "./components/Badge";
 import Button from "./components/Button";
+import ButtonIcon from "./components/Button-icon";
 
 export default function App() {
 
@@ -26,9 +27,15 @@ export default function App() {
         <Badge variant={"secondary"}>5</Badge>
         <Badge variant={"primary"}>2 de 5</Badge>
       </div>
+      
       <Button icon={PlusIcon}>
         Nada nao
       </Button>
+      <div>
+      <ButtonIcon icon={TrashIcon}/>
+      <ButtonIcon icon={TrashIcon} variant={"secondary"}/>
+      <ButtonIcon icon={TrashIcon} variant={"tertiary"}/>
+      </div>
     </div>
 
   )

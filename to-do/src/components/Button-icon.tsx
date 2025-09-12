@@ -3,7 +3,7 @@ import Icon from "./Icon";
 import {cva, type VariantProps} from "class-variance-authority"
 
 export const buttonIconVariants = cva(`
-    inline-flex items-center justify-center cursor-pointer transition group `, {
+    inline-flex items-center justify-center cursor-pointer transition group`, {
         variants:{
             variant:{
                 primary: "bg-green-base hover:bg-green-dark",

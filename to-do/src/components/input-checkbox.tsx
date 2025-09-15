@@ -1,11 +1,12 @@
-import { cva, type VariantProps } from "class-variance-authority";
 import type React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import Icon from "./Icon";
 import Checkbox from "../assets/icons/check.svg?react"
 
 
 export const inputCheckboxWrapperVariants = cva(`
-    inline-flex items-center justify-center cursor-pointer relative group
+    inline-flex items-center justify-center relative 
+    group
     `)  
 
     export const inputCheckboxVariants = cva(`
@@ -17,7 +18,7 @@ export const inputCheckboxWrapperVariants = cva(`
     `,{
         variants:{
             size:{
-                md: "w-5 rounded-sm"
+                md: "w-5 h-5 rounded-sm"
             },
             disabled:{
                 true: "pointer-events-none"
@@ -31,7 +32,7 @@ export const inputCheckboxWrapperVariants = cva(`
 
     export const inputCheckboxIconVariants = cva(`
         absolute top-1/2 left-1 -translate-y-1/2 
-        hidden peer-checked:checked:block
+        hidden peer-checked:block fill-white
         `,
     {
         variants:{
@@ -42,9 +43,7 @@ export const inputCheckboxWrapperVariants = cva(`
     },
     defaultVariants: {
         size: "md"
-    }
-
-    })
+    }})
 
 interface InputCheckboxProps extends VariantProps<typeof inputCheckboxIconVariants>,
 Omit<React.ComponentProps<"input">, "size"|"disable">{
@@ -57,7 +56,7 @@ export default function InputCheckbox({
     className,
     ...props
 }: InputCheckboxProps){
-    return<label className={inputCheckboxIconVariants({className})}>
+    return<label className={inputCheckboxWrapperVariants({className})}>
         <input type="checkbox" className={inputCheckboxVariants({size, disabled})} 
         {...props}/>
         <Icon className={inputCheckboxIconVariants({size})} svg={Checkbox}/>

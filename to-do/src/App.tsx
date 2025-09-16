@@ -13,6 +13,7 @@ import InputText from "./components/Input-text";
 import InputCheckbox from "./components/input-checkbox";
 import Card from "./components/Card";
 import Container from "./components/Container";
+import Skeleton from "./components/Skeleton";
 
 export default function App() {
 
@@ -31,6 +32,7 @@ export default function App() {
       <div>
         <Badge variant={"secondary"}>5</Badge>
         <Badge variant={"primary"}>2 de 5</Badge>
+        <Badge loading variant={"primary"}>5</Badge>
       </div>
       
       <Button icon={PlusIcon}>
@@ -40,6 +42,7 @@ export default function App() {
       <ButtonIcon icon={TrashIcon}/>
       <ButtonIcon icon={TrashIcon} variant={"secondary"}/>
       <ButtonIcon icon={TrashIcon} variant={"tertiary"}/>
+      <ButtonIcon icon={TrashIcon} loading/>
       </div>
       <div>
         <InputText
@@ -48,12 +51,19 @@ export default function App() {
       </div>
       <div>
         <InputCheckbox />
+        <InputCheckbox loading/>
       </div>
 
       <div>
         <Card size={"md"}>
           Olá mundo
         </Card>
+      </div>
+
+      <div className="space-y-2">
+      <Skeleton className=" h-5"/>
+      <Skeleton className=" h-5"/>
+      <Skeleton className="w-96 h-5"/>
       </div>
     </div>
     </Container>

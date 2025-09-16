@@ -12,10 +12,12 @@ import ButtonIcon from "./components/Button-icon";
 import InputText from "./components/Input-text";
 import InputCheckbox from "./components/input-checkbox";
 import Card from "./components/Card";
+import Container from "./components/Container";
 
 export default function App() {
 
   return (
+    <Container>
     <div>
       <Text variant="body-md" className="text-pink-base"> Olá mundo </Text>
       <Text variant="body-md-bold" className="text-green-base"> Olá mundo </Text>
@@ -54,6 +56,7 @@ export default function App() {
         </Card>
       </div>
     </div>
+    </Container>
 
   )
 }

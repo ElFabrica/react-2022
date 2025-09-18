@@ -8,6 +8,12 @@ import InputCheckbox from "../components/input-checkbox";
 import InputText from "../components/Input-text";
 import Skeleton from "../components/Skeleton";
 import Text from "../components/Text";
+import TrashIcon from "../assets/icons/trash.svg?react"
+import CheckIcon from "../assets/icons/check.svg?react"
+import PlusIcon from "../assets/icons/plus.svg?react"
+import SpinnerIcon from "../assets/icons/spinner.svg?react"
+import PencilIcon from "../assets/icons/pencil.svg?react"
+import XIcon from "../assets/icons/x.svg?react"
 
 
 export default function PageComponents() {
@@ -63,4 +69,4 @@ export default function PageComponents() {
         </Container>
 
     )
-} 
+}

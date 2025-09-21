@@ -10,7 +10,6 @@ export default function LayoutMain() {
             <Header />
             <MainContent>
                 <Outlet />
-                CONTEUDO PRINCIPAL
             </MainContent>
             <Footer />
         </>

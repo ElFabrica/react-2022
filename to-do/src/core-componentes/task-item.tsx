@@ -8,7 +8,7 @@ import PencilIcon from "../assets/icons/pencil.svg?react"
 import XIcon from "../assets/icons/x.svg?react"
 import CheckIcon from "../assets/icons/check.svg?react"
 import InputText from "../components/Input-text";
-import type { Tasks } from "../models/tasks";
+import { TasksState, type Tasks } from "../models/tasks";
 import { cx } from "class-variance-authority";
 
 interface TaskItemsProps{
@@ -17,7 +17,7 @@ interface TaskItemsProps{
 
 export default function TaskItem({task}:TaskItemsProps) {
 
-    const [isEditing, setIsEditing] = React.useState(false)
+    const [isEditing, setIsEditing] = React.useState(task?.state == TasksState.Creating)
 
     function handleEditTask() {
         setIsEditing(true)

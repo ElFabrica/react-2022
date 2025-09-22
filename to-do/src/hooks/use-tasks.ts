@@ -1,5 +1,5 @@
 import useLocalStorage from "use-local-storage";
-import { TASKS_KEY, type Tasks } from "../mdoels/tasks";
+import { TASKS_KEY, type Tasks } from "../models/tasks";
 
 
 export default function useTasks() {

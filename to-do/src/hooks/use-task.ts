@@ -1,5 +1,5 @@
 import useLocalStorage from "use-local-storage";
-import { TASKS_KEY, TasksState, type Tasks } from "../mdoels/tasks";
+import { TASKS_KEY, TasksState, type Tasks } from "../models/tasks";
 
 
 export default function useTask() {
@@ -13,5 +13,8 @@ export default function useTask() {
             title: "",
             state: TasksState.Creating
         }])
+    }
+    return{
+        prepareTask
     }
 }

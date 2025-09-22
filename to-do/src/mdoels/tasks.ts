@@ -1,0 +1,14 @@
+export const TASKS_KEY = 'tasks'
+
+export enum TasksState {
+    Creating = 'creating',
+    Created = 'created'
+}
+
+
+export interface Tasks {
+    id: string;
+    title: string;
+    concluided?: boolean;
+    state?: TasksState
+}

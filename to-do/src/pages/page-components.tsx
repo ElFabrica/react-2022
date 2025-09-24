@@ -35,14 +35,14 @@ export default function PageComponents() {
                     <Badge loading variant={"primary"}>5</Badge>
                 </div>
 
-                <Button icon={PlusIcon}>
+                <Button icon={PlusIcon} handling>
                     Nada nao
                 </Button>
                 <div>
                     <ButtonIcon icon={TrashIcon} />
-                    <ButtonIcon icon={TrashIcon} variant={"secondary"} />
-                    <ButtonIcon icon={TrashIcon} variant={"tertiary"} />
-                    <ButtonIcon icon={TrashIcon} loading />
+                    <ButtonIcon icon={TrashIcon} handling variant={"secondary"} />
+                    <ButtonIcon icon={TrashIcon}  variant={"tertiary"} />
+                    <ButtonIcon icon={TrashIcon} loading handling />
                 </div>
                 <div>
                     <InputText

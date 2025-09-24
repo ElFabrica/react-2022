@@ -8,22 +8,29 @@ import PencilIcon from "../assets/icons/pencil.svg?react"
 import XIcon from "../assets/icons/x.svg?react"
 import CheckIcon from "../assets/icons/check.svg?react"
 import InputText from "../components/Input-text";
-import { TasksState, type Tasks } from "../models/tasks";
+import { TasksState, type Task } from "../models/tasks";
 import { cx } from "class-variance-authority";
+import useTask from "../hooks/use-task";
 
 interface TaskItemsProps{
-    task: Tasks
+    task: Task
 }
 
 export default function TaskItem({task}:TaskItemsProps) {
 
+    const { updateTask, updateTaskStatus, deletTask } = useTask()
+
     const [isEditing, setIsEditing] = React.useState(task?.state == TasksState.Creating)
-    const [taskTitle, setTaskTitle] = useState("")
+    const [taskTitle, setTaskTitle] = useState(task.title || "")
     function handleEditTask() {
         setIsEditing(true)
     }
     function handleExitEditTask() {
+        if(task.state === TasksState.Creating){
+            deletTask(task.id)
+        }
         setIsEditing(false)
+        
     }
 
     function handleChangeTaskTitle(e: ChangeEvent<HTMLInputElement>){
@@ -32,8 +39,18 @@ export default function TaskItem({task}:TaskItemsProps) {
     function handleSaveTask(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         console.log({id:task.id, title:taskTitle})
-        //Chamada para a função de atualizar;
+        updateTask(task.id, {title: taskTitle})
         setIsEditing(false)
+    }
+
+    function handleChenageTaskStatus(e: React.ChangeEvent<HTMLInputElement>){
+        const checked = e.target.checked
+        updateTaskStatus(task.id, checked)
+        console.log(checked)
+    }
+
+    function handleDeleteTask(){
+        deletTask(task.id)
     }
 
     return (
@@ -41,20 +58,32 @@ export default function TaskItem({task}:TaskItemsProps) {
         <Card size="md" >
             {!isEditing ?
                 <div className="flex items-center gap-4">
-                    <InputCheckbox value={task?.concluided?.toString()} checked={task?.concluided} />
+                    <InputCheckbox
+                    checked={task?.concluided} 
+                    onChange={handleChenageTaskStatus}
+                    />
                     <Text className={cx("flex-1", {
                         "line-through": task?.concluided
                     })}>
                         
                         {task?.title}</Text>
                     <div className="flex gap-1 ">
-                        <ButtonIcon icon={TrashIcon} variant="tertiary" />
+                        <ButtonIcon 
+                        icon={TrashIcon} 
+                        variant="tertiary" 
+                        onClick={handleDeleteTask}
+                        />
                         <ButtonIcon icon={PencilIcon} variant="tertiary" onClick={handleEditTask} />
                     </div>
                 </div>
                 :
                 <form onSubmit={handleSaveTask} className="flex items-center gap-4">
-                    <InputText className="flex-1"  onChange={handleChangeTaskTitle} required autoFocus/>
+                    <InputText className="flex-1"
+                    onChange={handleChangeTaskTitle} 
+                    required 
+                    autoFocus
+                    value={taskTitle}
+                    />
                     <div className="flex gap-1 ">
                         <ButtonIcon icon={XIcon} variant="secondary" onClick={handleExitEditTask} type="button" />
                         <ButtonIcon icon={CheckIcon} variant="primary" type="submit" />

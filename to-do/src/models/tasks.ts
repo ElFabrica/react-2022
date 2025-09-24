@@ -6,7 +6,7 @@ export enum TasksState {
 }
 
 
-export interface Tasks {
+export interface Task {
     id: string;
     title: string;
     concluided?: boolean;

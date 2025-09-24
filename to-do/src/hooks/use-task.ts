@@ -1,9 +1,9 @@
 import useLocalStorage from "use-local-storage";
-import { TASKS_KEY, TasksState, type Tasks } from "../models/tasks";
+import { TASKS_KEY, TasksState, type Task } from "../models/tasks";
 
 
 export default function useTask() {
-    const [task, setTask] = useLocalStorage<Tasks[]>(TASKS_KEY, [])
+    const [task, setTask] = useLocalStorage<Task[]>(TASKS_KEY, [])
 
     function prepareTask() {
 
@@ -14,7 +14,27 @@ export default function useTask() {
             state: TasksState.Creating
         }])
     }
+
+    function updateTask(id: string, payload: {title: Task["title"]}){
+        setTask(
+            task.map((task)=> task.id === id ? {
+                ...task, state: TasksState.Created, ...payload}: task)
+        )
+    }
+
+    function updateTaskStatus(id: string, concluided: boolean){
+        setTask(
+            task.map((task) => task.id ===id ? {...task, concluided} : task)
+        )
+    }
+    function deletTask(id: string){
+        setTask(task.filter((task) => task.id !== id ))
+    }
+    
     return{
-        prepareTask
+        prepareTask,
+        updateTask,
+        updateTaskStatus,
+        deletTask
     }
 }

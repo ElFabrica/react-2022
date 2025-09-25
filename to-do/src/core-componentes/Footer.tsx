@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
 import Text from "../components/Text";
 
-export default function Footer(){
-    return(
-    <footer className="mt-5 md:my-10">
+export default function Footer() {
+    return (
+        <footer className="mt-5 md:my-10">
             <nav className="flex items-center justify-center gap-4">
                 <NavLink to="/">
                     <Text variant="body-sm-bold" className="text-gray-300">Tarefas</Text>
@@ -11,10 +11,12 @@ export default function Footer(){
 
                 <NavLink to="/componentes">
                     <Text variant="body-sm-bold" className="text-gray-300">
-                        Componente 
-                        </Text>
+                        Componente
+                    </Text>
                 </NavLink>
+                
+                
             </nav>
         </footer>
-        )
+    )
 }

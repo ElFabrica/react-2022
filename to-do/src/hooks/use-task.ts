@@ -19,24 +19,29 @@ export default function useTask() {
         }])
     }
 
-    function updateTask(id: string, payload: {title: Task["title"]}){
+    async function updateTask(id: string, payload: {title: Task["title"]}){
+        setIsUpdatingTask(true)
+        await delay(1000);
         setTask(
             task.map((task)=> task.id === id ? {
                 ...task, state: TasksState.Created, ...payload}: task)
         )
-    }
-
-    async function updateTaskStatus(id: string, concluided: boolean){
-        setIsUpdatingTask(true)
-        await delay(1000);
-        setTask(
-            task.map((task) => task.id ===id ? {...task, concluided} : task)
-        )
         setIsUpdatingTask(false)
 
     }
-    function deletTask(id: string){
+
+     function updateTaskStatus(id: string, concluided: boolean){
+        setTask(
+            task.map((task) => task.id ===id ? {...task, concluided} : task)
+        )
+
+    }
+    async function deletTask(id: string){
+        setIsDeletingTask(true)
+        await delay(1000);
         setTask(task.filter((task) => task.id !== id ))
+        setIsDeletingTask(false)
+
     }
     
     return{
@@ -44,6 +49,7 @@ export default function useTask() {
         updateTask,
         updateTaskStatus,
         deletTask,
-        isUpdatingTask
+        isUpdatingTask,
+        isDeletingTask
     }
 }

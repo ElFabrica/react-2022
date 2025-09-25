@@ -20,7 +20,7 @@ interface TaskItemsProps{
 
 export default function TaskItem({task, loading}:TaskItemsProps) {
 
-    const { updateTask, updateTaskStatus, deletTask } = useTask()
+    const { updateTask, updateTaskStatus, deletTask, isUpdatingTask, isDeletingTask } = useTask()
 
     const [isEditing, setIsEditing] = React.useState(task?.state == TasksState.Creating)
     const [taskTitle, setTaskTitle] = useState(task.title || "")
@@ -38,10 +38,10 @@ export default function TaskItem({task, loading}:TaskItemsProps) {
     function handleChangeTaskTitle(e: ChangeEvent<HTMLInputElement>){
         setTaskTitle(e.target.value || "")
     }
-    function handleSaveTask(e:React.FormEvent<HTMLFormElement>){
+    async function handleSaveTask(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         console.log({id:task.id, title:taskTitle})
-        updateTask(task.id, {title: taskTitle})
+        await updateTask(task.id, {title: taskTitle})
         setIsEditing(false)
     }
 
@@ -51,8 +51,8 @@ export default function TaskItem({task, loading}:TaskItemsProps) {
         console.log(checked)
     }
 
-    function handleDeleteTask(){
-        deletTask(task.id)
+    async function handleDeleteTask(){
+        await deletTask(task.id)
     }
 
     return (
@@ -81,6 +81,8 @@ export default function TaskItem({task, loading}:TaskItemsProps) {
                         variant="tertiary" 
                         onClick={handleDeleteTask}
                         loading={loading}
+                        handling={isDeletingTask}
+
 
                         />
                         <ButtonIcon 
@@ -112,7 +114,7 @@ export default function TaskItem({task, loading}:TaskItemsProps) {
                         icon={CheckIcon} 
                         variant="primary"
                         type="submit" 
-                       
+                       handling={isUpdatingTask}
 
                          />
                     </div>

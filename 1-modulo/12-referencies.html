@@ -45,19 +45,32 @@
                 scrollHeight: 0
             })
 
-            const [scrollPercentage, setScrollPercentage] = React.useState(0) 
+            const [scrollPercentage, setScrollPercentage] = React.useState(0)
 
-            function handleContainerScroll(){
-                if(containerRef.current){
-                    
+            function handleContainerScroll() {
+                if (!containerRef.current) {
+                    return
                 }
+                const { scrollTop, scrollHeight, clientHeight } = containerRef.current
+                setScrollInfo({
+                    scrollTop,
+                    scrollHeight,
+                    clientHeight
+                })
+                const maxScroll = scrollHeight - clientHeight;
+                const percentage = Math.round((scrollTop/maxScroll) * 100)
+
+                setScrollPercentage(percentage)
             }
+
+
 
             return (
                 <div className={"space-y-4"}>
-                    <div 
-                    ref={containerRef}
-                    className={`border border-solid 
+                    <div
+                        ref={containerRef}
+                        onScroll ={handleContainerScroll }
+                        className={`border border-solid 
                     border-blue-500 p-4 h-60 overflow-y-auto
                     `}>
                         <div className={`space-y-4`}>
@@ -69,15 +82,21 @@
                         </div>
                     </div>
                     <ul className={`space-y-2 list-disc pl-5`}>
-                        <li>Progresso do scroll:</li>
-                        <li>Onde está o scroll (scrollTop):</li>
+                        <li>Progresso do scroll: {scrollPercentage}%
+                        </li>
+                        <li>Onde está o scroll (scrollTop): {scrollInfo.scrollTop}
+                        </li>
+                        <li>Tamanho do scroll (scrollHeight): {scrollInfo.clientHeight}
+                        </li>
+                        <li>Tamanho do container (clientHeight): {scrollInfo.clientHeight}
+                        </li>
                     </ul>
                 </div>
             )
         }
 
         function App() {
-            return (
+            return ( 
                 <main className='p-3 space-y-6'>
                     <InputFocus />
                     <hr />
